@@ -3,7 +3,7 @@ export interface UserModel {
   name: string | null;
   email: string;
   password: string;
-  created_at: Date;
-  updated_at: Date;
-  deleted_at: Date;
+  pictureUrl: string | null
+  createdAt: Date;
+  updatedAt: Date | null;
 }
