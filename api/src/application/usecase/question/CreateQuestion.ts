@@ -11,7 +11,7 @@ export default class CreateQuestion {
   }
 
   async execute(questionData: InputCreateQuestion): Promise<OutputCreateQuestion> {
-    const question = QuestionEntity.create(questionData.question, questionData.userId);
+    const question = QuestionEntity.create(questionData.userId, questionData.question);
     await this.questionRepository.create(question);
 
     return {

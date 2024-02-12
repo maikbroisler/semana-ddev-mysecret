@@ -3,6 +3,7 @@ import 'express-async-errors';
 import cors from 'cors';
 import HttpServer from './HttpServer';
 import UserControllerImpl from './controller/UserControllerImpl';
+import RouterFactory from './controller/RouterFactory';
 
 
 export default class ExpressAdapter implements HttpServer {
@@ -13,11 +14,12 @@ export default class ExpressAdapter implements HttpServer {
     this.app.use(cors())
     this.app.use(express.json())
 
+    const routerFactory = new RouterFactory();
+
 
     const userControler = new UserControllerImpl()
 
-    this.app.use('/api/user', userControler.create);
-
+    this.app.use('/api', routerFactory.register());
     this.app.use('/api', (request, response) => {
       response.json({ message: 'Hello World!' })
     })
